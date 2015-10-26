@@ -61,9 +61,18 @@ SomethingDigitalRecentlyViewed.prototype = {
 	getRenderedItems: function(){
 		var items = this.getLoadedStorage();
 
-		return items.map(function(a){
+		if(sdRecentlyViewed.sortOrder === 'newold'){
+			var reversedItems = items;
+			reversedItems.reverse();
+
+			return reversedItems.map(function(a){
 				return a.html;
 			}).join('');
+		}
+
+		return items.map(function(a){
+			return a.html;
+		}).join('');
 	},
 
 	render: function(){
