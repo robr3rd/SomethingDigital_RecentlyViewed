@@ -62,8 +62,18 @@ SomethingDigitalRecentlyViewed.prototype = {
 		var items = this.getLoadedStorage();
 
 		return items.map(function(a){
+			if($(document.body).hasClassName('catalog-product-view')){
+
+				var currentProductId = $$('#product_addtocart_form input[name=product]')[0].value;
+
+				if(a.id !== currentProductId){
+					return a.html;
+				}
+
+			} else {
 				return a.html;
-			}).join('');
+			}
+		}).join('');
 	},
 
 	render: function(){
