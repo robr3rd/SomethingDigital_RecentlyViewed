@@ -88,11 +88,16 @@ SomethingDigitalRecentlyViewed.prototype = {
 			return;
 		}
 
-		var html = rvTemplate.innerHTML.replace('{{items}}',this.getRenderedItems());
-		$(target).insert({top: html});
+		var insertParams = {}, //to enable use of variable keys (i.e. $position: content)
+			insertPosition = sdRecentlyViewed.insertPosition,
+			html = rvTemplate.innerHTML.replace('{{items}}',this.getRenderedItems());
+
+		insertParams[insertPosition] = html;
+
+		$(target).insert(insertParams);
 
 	}
-}
+};
 
 document.observe('dom:loaded',function(){
 	new SomethingDigitalRecentlyViewed();
